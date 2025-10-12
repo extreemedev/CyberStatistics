@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Homework 1</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1 class="brand">Cyber Statistics</h1>
+        <nav aria-label="Main navigation">
+          <ul class="nav">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li class="nav-folder">
+              <span class="nav-folder-label">Homework ▾</span>
+              <ul class="nav-folder-list">
+                <li><a href="/homework/homework1/homework1.html" aria-current="page">Homework 1</a></li>
+                <li><a href="/homework/homework2/homework2.html">Homework 2</a></li>
+                <li><a href="/homework/homework3/homework3.html">Homework 3</a></li>
+                <li><a href="/homework/homework4/homework4.html">Homework 4</a></li>
+                <li><a href="/homework/homework5/homework5.html">Homework 5</a></li>
+                <li><a href="/homework/homework6/homework6.html">Homework 6</a></li>
+                <li><a href="/homework/homework7/homework7.html">Homework 7</a></li>
+                <li><a href="/homework/homework8/homework8.html">Homework 8</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="container" id="main">
+</section>
+
+
+<section class="content" aria-labelledby="sec-def">
+<h2 id="sec-def">Definition and scope of statistics</h2>
+<p>Statistics is the scientific discipline concerned with the collection, description, analysis, interpretation and presentation of data. It provides mathematical frameworks and procedures to characterise variability, to make principled inferences from samples to populations, and to quantify uncertainty through probability models.</p>
+<p>From a methodological viewpoint, statistics supplies both descriptive tools (e.g. summary measures, distributions, visualisations) and inferential tools (e.g. hypothesis testing, confidence intervals, regression and probabilistic modelling) that allow practitioners to extract reliable information from noisy measurements.</p>
+</section>
+
+
+<section class="content" aria-labelledby="sec-why">
+<h2 id="sec-why">Why statistics is useful for cybersecurity</h2>
+<p>Cybersecurity datasets are inherently high-volume, noisy, and non-stationary: network flows, packet headers, system logs and telemetry streams contain variability across users, time, and use-cases. Statistical methods are essential in cybersecurity for several reasons:</p>
+<ul>
+<li><strong>Baselining normal behaviour:</strong> Statistical profiling allows systems to construct formal models of routine activity (e.g. average connection rates, byte distributions, typical port usage) and to quantify deviations from those baselines.</li>
+<li><strong>Anomaly quantification:</strong> Probability models let analysts compute the likelihood of observed events under a learned normal model and flag unusual events that merit investigation.</li>
+<li><strong>Dimensionality reduction and feature extraction:</strong> Techniques such as principal component analysis (PCA), clustering and information-theoretic measures help reduce noise and highlight the signal in high-dimensional telemetry.</li>
+<li><strong>Robust decision-making under uncertainty:</strong> Statistical hypothesis testing, confidence intervals, and Bayesian inference provide disciplined ways to trade off false positives and false negatives and to update beliefs as new evidence arrives.</li>
+<li><strong>Model evaluation:</strong> Cross-validation, ROC curves, precision/recall measures and other statistical metrics are the standard way to validate detection systems and compare design choices.</li>
+</ul>
+</section>
+
+
+<section class="content" aria-labelledby="sec-ids">
+<h2 id="sec-ids">How IDS/IPS use statistical methods (conceptual overview)</h2>
+<p>IDS (Intrusion Detection Systems) and IPS (Intrusion Prevention Systems) historically relied on two broad families of detection methodologies: signature/misuse detection and anomaly-based detection. Signature detection matches traffic against known patterns; anomaly detection uses statistical models to identify behaviours that diverge from established norms.</p>
+<p>Anomaly-based IDS/IPS typically implement one or more of the following statistical approaches:</p>
+<ul>
+<li><strong>Thresholding on statistical aggregates:</strong> Simple but effective counters and rates (e.g. packets per second, failed logins per minute) compared against dynamic thresholds derived from historical percentiles or moving averages.</li>
+<li><strong>Probabilistic models:</strong> Parametric or non-parametric density estimation (e.g. Gaussian models, kernel density estimates) to compute the likelihood of observed feature vectors and flag low-likelihood events.</li>
+<li><strong>Time-series analysis:</strong> Autoregressive models, exponentially-weighted moving averages (EWMA) and change-point detection methods to detect sudden shifts in traffic patterns (e.g. volumetric DDoS).</li>
+<li><strong>Multivariate techniques:</strong> PCA and subspace methods to detect coordinated deviations across multiple features; multivariate statistical process control (SPC) for early warning.</li>
+<li><strong>Clustering and unsupervised learning:</strong> k-means, DBSCAN and related algorithms to group routine behaviours and identify outliers as potential intrusions.</li>
+<li><strong>Statistical ensembles and score fusion:</strong> Combining outputs from multiple statistical detectors (and signatures) to produce a consolidated risk score, often calibrated to meet operational tolerances for false positives.</li>
+</ul>
+</section>
+
+
+<section class="content" aria-labelledby="sec-ngfw">
+<h2 id="sec-ngfw">Statistical methods in modern NGFWs (practical aspects)</h2>
+<p>Next-generation firewalls (NGFWs) integrate stateful packet inspection, application awareness, threat intelligence and often embedded IDS/IPS engines. Modern NGFWs augment signature rules with statistical and heuristic modules to detect behaviour that signatures cannot capture  for example zero-day exploit attempts, low-and-slow reconnaissance, and distributed scanning.</p>
+<p>Common statistical features and implementations in NGFW/IPS modules include:</p>
+<ul>
+<li><strong>Rate and volume based detection:</strong> Detecting volumetric anomalies by comparing current traffic rates to learned baselines (percentile-based thresholds, EWMA). Useful for DDoS and flood detection.</li>
+<li><strong>Entropy and distributional checks:</strong> Entropy measures of payloads, destination addresses, or user-agent strings can reveal changes in distribution consistent with command-and-control channels or data exfiltration.</li>
+<li><strong>Sequence and timing analysis:</strong> Statistical models over packet inter-arrival times and sequence patterns to detect protocol misuse or tunnelling behaviour.</li>
+<li><strong>Adaptive thresholding and concept-drift handling:</strong> Operational NGFWs often implement adaptive thresholds that adjust to diurnal patterns and network growth to reduce false positives while remaining sensitive to genuine anomalies.</li>
+<li><strong>Integration with signature engines:</strong> Statistical alarms are typically correlated with signature matches and threat intelligence feeds; combined signals raise the confidence score and trigger prevention actions.</li>
+</ul>
+<p>Vendors explicitly document hybrid designs where statistical anomaly detectors complement signature-based engines to broaden detection coverage and to reduce the window of exposure for emerging threats.</p>
+</section>
+
+
+<section class="content" aria-labelledby="sec-challenges">
+<h2 id="sec-challenges">Practical challenges and limitations</h2>
+<p>While statistical methods are powerful, they are not a panacea. Common practical limitations include:</p>
+<ul>
+<li><strong>Concept drift:</strong> Network behaviour changes over time new applications, shifts in user habits, and cloud migration require continual model retraining and validation.</li>
+<li><strong>High false positive rates:</strong> Poorly tuned statistical detectors may generate many alerts, increasing analyst workload and causing alert fatigue.</li>
+<li><strong>Curse of dimensionality:</strong> High-dimensional feature spaces make density estimation and distance-based anomaly detection more difficult and computationally expensive.</li>
+<li><strong>Adversarial adaptation:</strong> Attackers who understand statistical detectors can craft traffic to avoid triggering simple statistical thresholds.</li>
+</ul>
+<p>Mitigations involve robust feature engineering, ensemble systems, continual evaluation with labelled datasets, and embedding human-in-the-loop review processes.</p>
+</section>
+
+<section class="hero" aria-labelledby="hero-title">
+        <h2 id="hero-title">Statistical Methods in Cybersecurity Products</h2>
+        <p class="lead">Real‑world metrics and current evidence on how modern cybersecurity products such as Suricata IDS and next‑generation firewalls integrate statistical analysis for anomaly detection, performance optimization, and adaptive threat response.</p>
+      </section>
+
+      <section class="stats-grid" aria-label="Key statistics">
+        <article class="flip-card" tabindex="0" aria-label="Suricata IoC Rule Analysis">
+          <div class="flip-inner">
+            <div class="card card-front">
+              <h3 class="card-title">Suricata IoC Rule Scaling</h3>
+              <p class="stat-number">100K → 1M Rules</p>
+              <p class="muted">Performance Degradation Threshold</p>
+            </div>
+
+            <div class="card card-back">
+              <h3 class="card-title">Study Findings</h3>
+              <ul>
+                <li>Detection accuracy drops sharply beyond ~100K active IoC rules.</li>
+                <li>Excessive rule activation increases noise and false positives.</li>
+                <li>Statistical weighting and filtering recommended for optimization.</li>
+              </ul>
+              <p class="muted">Source: JUTIF, 2024</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="flip-card" tabindex="0" aria-label="Suricata vs PSAD Study">
+          <div class="flip-inner">
+            <div class="card card-front">
+              <h3 class="card-title">Suricata & PSAD Accuracy</h3>
+              <p class="stat-number">100%</p>
+              <p class="muted">Detection Accuracy (Port Scan, DDoS, Brute Force)</p>
+            </div>
+
+            <div class="card card-back">
+              <h3 class="card-title">Resource Metrics</h3>
+              <ul>
+                <li>CPU Utilization: ~1.64%</li>
+                <li>Disk Usage: ~8.42%</li>
+                <li>Demonstrates statistical baseline efficiency</li>
+              </ul>
+              <p class="muted">Source: IOPScience, 2024</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="flip-card" tabindex="0" aria-label="FortiGate NGFW Statistical Detection">
+          <div class="flip-inner">
+            <div class="card card-front">
+              <h3 class="card-title">FortiGate NGFW</h3>
+              <p class="stat-number">Statistical Anomaly‑Based IPS</p>
+              <p class="muted">Baseline Comparison Engine</p>
+            </div>
+
+            <div class="card card-back">
+              <h3 class="card-title">Implementation Details</h3>
+              <ul>
+                <li>Uses rate‑based thresholds & dynamic baselines.</li>
+                <li>Statistical profiling of packets per second, login rates.</li>
+                <li>Probabilistic detection for DoS & brute force prevention.</li>
+              </ul>
+              <p class="muted">Source: Fortinet Docs, 2025</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="flip-card" tabindex="0" aria-label="IDS False Positive Study">
+          <div class="flip-inner">
+            <div class="card card-front">
+              <h3 class="card-title">IDS False Positives</h3>
+              <p class="stat-number">74.3% → 55.2%</p>
+              <p class="muted">Suricata vs Snort FPR</p>
+            </div>
+
+            <div class="card card-back">
+              <h3 class="card-title">Study Highlights</h3>
+              <ul>
+                <li>Suricata: FPR 74.3%, FNR 16.7%</li>
+                <li>Snort: FPR 55.2%, FNR 6.7%</li>
+                <li>Need for statistical calibration and ML ensemble tuning.</li>
+              </ul>
+              <p class="muted">Source: Northumbria University, 2023</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="about-callout" aria-labelledby="about-title">
+        <h3 id="about-title">Analytical Context</h3>
+        <p>These data demonstrate how statistical modelling including baseline construction, rate based anomaly detection, and probabilistic inference forms the foundation of intrusion detection in modern NGFW and IDS/IPS products.</p>
+        <p>Current research trends focus on hybrid systems where statistical methods integrate with machine learning for adaptive tuning, thresholding, and concept drift management.</p>
+      </section>
+
+
+<section class="content" aria-labelledby="sec-conclusion">
+<h2 id="sec-conclusion">Conclusion</h2>
+<p>Statistics provides the foundational language and tools that make anomaly-based intrusion detection possible. In modern NGFWs, statistical methods complement signature detection to extend coverage to previously unseen or polymorphic threats. Implementing statistical IDS/IPS requires careful attention to baseline construction, thresholding, evaluation metrics, and operational maintenance to manage false positives and model drift.</p>
+</section>
+
+
+<section class="references" aria-labelledby="refs-title">
+<h3 id="refs-title">References</h3>
+<ol>
+<li>NIST Special Publication 800-94, <em>Guide to Intrusion Detection and Prevention Systems (IDPS)</em> (2007). Available: <a href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-94.pdf" target="_blank" rel="noopener">https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-94.pdf</a></li>
+<li>Khraisat, A. et al., "Survey of intrusion detection systems: techniques, datasets and challenges" (2019). Available: <a href="https://cybersecurity.springeropen.com/articles/10.1186/s42400-019-0038-7" target="_blank" rel="noopener">https://cybersecurity.springeropen.com/articles/10.1186/s42400-019-0038-7</a></li>
+<li>Palo Alto Networks, "What is an Intrusion Prevention System (IPS)?". Available: <a href="https://www.paloaltonetworks.com/cyberpedia/what-is-an-intrusion-prevention-system-ips" target="_blank" rel="noopener">https://www.paloaltonetworks.com/cyberpedia/what-is-an-intrusion-prevention-system-ips</a></li>
+<li>Suricata IDS/IPS project Features and documentation. Available: <a href="https://suricata.io/" target="_blank" rel="noopener">https://suricata.io/</a></li>
+<li>NIST publication: "Anomaly Based Intrusion Detection using Large Language Models" (2024). Available: <a href="https://www.nist.gov/publications/anomaly-based-intrusion-detection-using-large-language-models" target="_blank" rel="noopener">https://www.nist.gov/publications/anomaly-based-intrusion-detection-using-large-language-models</a></li>
+<li>JUTIF Journal (2024), <em>Analysis of Suricata IoC Rules on Detection Accuracy</em>. Available: <a href="https://jutif.if.unsoed.ac.id/index.php/jurnal/article/view/1013" target="_blank" rel="noopener">https://jutif.if.unsoed.ac.id/index.php/jurnal/article/view/1013</a></li>
+<li>IOPScience (2024), <em>Performance comparison of Suricata and PSAD on DDoS, Port Scanning and Brute Force attacks</em>. Available: <a href="https://iopscience.iop.org/article/10.1088/1757-899X/662/5/052013" target="_blank" rel="noopener">https://iopscience.iop.org/article/10.1088/1757-899X/662/5/052013</a></li>
+<li>Fortinet Documentation (2025), <em>Statistical anomaly-based detection in FortiGate NGFW</em>. Available: <a href="https://docs.fortinet.com/document/fortigate/7.4.2/ngfw-atp-concept-guide/868490/statistical-anomaly-based-detection" target="_blank" rel="noopener">https://docs.fortinet.com/document/fortigate/7.4.2/ngfw-atp-concept-guide/868490/statistical-anomaly-based-detection</a></li>
+<li>Northumbria University (2023), <em>Performance comparison of intrusion detection systems and application of machine learning to Snort</em>. Available: <a href="https://nrl.northumbria.ac.uk/35851/1/Shah%2C%20Issac%20-%20Performance%20comparison%20of%20intrusion%20detection%20systems%20and%20application%20of%20machine%20learning%20to%20Snort%20system%20AAM.pdf" target="_blank" rel="noopener">https://nrl.northumbria.ac.uk/35851/1/Shah%2C%20Issac%20-%20Performance%20comparison%20of%20intrusion%20detection%20systems%20and%20application%20of%20machine%20learning%20to%20Snort%20system%20AAM.pdf</a></li>
+</section>
+
+
+</main>
+
+
+<footer class="site-footer">
+<div class="container">
+<p>&copy; 2025 Cyber Statistics</p>
+</div>
+</footer>
+</body>
+</html>
