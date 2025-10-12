@@ -1,4 +1,4 @@
-# Cyber Statistics — Static HTML/CSS Website
+# Cyber Statistics Website
 
 Cyber Statistics is a modular website dedicated to exploring cybersecurity topics through statistical analysis and practical examples. The project is designed for clarity, accessibility, and ease of navigation, using only static HTML and CSS (no JavaScript required).
 
