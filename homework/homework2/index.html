@@ -9,14 +9,14 @@
   <body>
     <header class="site-header">
       <div class="container">
-        <h1 class="brand">Cyber Statistics</h1>
+        <h1 class="brand"><a href="/CyberStatistics/index.html" style="text-decoration:none; color:inherit;">CyberStatistics</a></h1>
         <nav aria-label="Main navigation">
           <ul class="nav">
             <li><a href="/CyberStatistics/index.html">Home</a></li>
             <li><a href="/CyberStatistics/about.html">About</a></li>
-            <li class="nav-folder">
-              <span class="nav-folder-label">Homework ▾</span>
-              <ul class="nav-folder-list">
+            <li class="dropdown">
+              <a href="#">Homework ▾</a>
+              <div class="dropdown-content">
                 <a href="/CyberStatistics/homework/homework1/index.html">Homework 1</a>
                 <a href="/CyberStatistics/homework/homework2/index.html" aria-current="page">Homework 2</a>
                 <a href="/CyberStatistics/homework/homework3/index.html">Homework 3</a>
@@ -25,19 +25,94 @@
                 <a href="/CyberStatistics/homework/homework6/index.html">Homework 6</a>
                 <a href="/CyberStatistics/homework/homework7/index.html">Homework 7</a>
                 <a href="/CyberStatistics/homework/homework8/index.html">Homework 8</a>
-              </ul>
+              </div>
             </li>
           </ul>
         </nav>
       </div>
     </header>
-    <main class="container">
-      <h2>Homework 2</h2>
-      <p>Content for Homework 2 will be published here.</p>
+    
+
+    <main class="container" id="main">
+    <section class="hero" aria-labelledby="hero-title">
+    <h2 id="hero-title">Homework 2: Datasets and Distributions</h2>
+    <p class="lead">Exploring the fundamental concepts of datasets and probability distributions through practical exercises using Microsoft Access and basic statistical computation.</p>
+    </section>
+
+
+    <section class="content" aria-labelledby="sec-dataset">
+    <h3 id="sec-dataset">1. Concept of a Dataset</h3>
+    <p>A <strong>dataset</strong> is a structured collection of data, typically represented in tabular form, where each row corresponds to an observation (or record) and each column corresponds to a variable (or feature). In the context of cybersecurity, datasets often contain network logs, user activity, or system events used for threat detection and anomaly analysis.</p>
+    <p>Each dataset must define clear <em>attributes</em> (such as IP address, timestamp, packet size) and a <em>domain</em> of values. A well-designed dataset enables descriptive statistics, visualization, and inference.</p>
+    </section>
+
+
+    <section class="content" aria-labelledby="sec-distribution">
+    <h3 id="sec-distribution">2. Concept of Distribution</h3>
+    <p>A <strong>distribution</strong> describes how values of a variable are spread or concentrated across possible outcomes. In statistics, distributions allow us to quantify likelihoods, detect patterns, and model uncertainty. Common examples include the <em>normal distribution</em>, <em>uniform distribution</em>, and <em>Poisson distribution</em>.</p>
+    <p>In cybersecurity, understanding distributions helps identify anomalies — for instance, unusually high packet transmission rates might indicate a Denial-of-Service (DoS) attack if they deviate significantly from the expected statistical distribution of network activity.</p>
+
+
+    <figure class="chart">
+    <svg viewBox="0 0 100 50" role="img" aria-label="Bell-shaped normal distribution">
+    <path d="M0 45 Q25 5 50 25 T100 45" fill="none" stroke="#007bff" stroke-width="2" />
+    </svg>
+    <figcaption>A stylized representation of a normal distribution curve.</figcaption>
+    </figure>
+    </section>
+
+
+    <section class="content" aria-labelledby="sec-access">
+    <h3 id="sec-access">3. Creating a Dataset using a DBMS (Microsoft Access)</h3>
+    <p>For this exercise, a small dataset was created using <strong>Microsoft Access</strong>, simulating a simplified log of cybersecurity events. The table contains the following fields:</p>
+    <ul>
+    <li><strong>Event_ID</strong> – Primary key (integer)</li>
+    <li><strong>User</strong> – Identifier of the system user (text)</li>
+    <li><strong>Login_Attempts</strong> – Number of login attempts (integer)</li>
+    <li><strong>Bytes_Sent</strong> – Data transmitted (integer)</li>
+    <li><strong>Event_Type</strong> – Type of activity (categorical: “Normal”, “Suspicious”, “Attack”)</li>
+    </ul>
+    <p>Example records:</p>
+    <table class="data-table">
+    <thead>
+    <tr><th>Event_ID</th><th>User</th><th>Login_Attempts</th><th>Bytes_Sent</th><th>Event_Type</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>1</td><td>Alice</td><td>1</td><td>540</td><td>Normal</td></tr>
+    <tr><td>2</td><td>Bob</td><td>3</td><td>1200</td><td>Suspicious</td></tr>
+    <tr><td>3</td><td>Carol</td><td>8</td><td>2100</td><td>Attack</td></tr>
+    <tr><td>4</td><td>Dan</td><td>2</td><td>700</td><td>Normal</td></tr>
+    </tbody>
+    </table>
+    </section>
+
+
+    <section class="content" aria-labelledby="sec-univariate">
+    <h3 id="sec-univariate">4. Computing the K Univariate Distributions (K ≤ 3)</h3>
+    <p>We computed three univariate distributions using the dataset above:</p>
+    <ol>
+    <li><strong>Login_Attempts Distribution:</strong> Frequency of login attempts among users.</li>
+    <li><strong>Bytes_Sent Distribution:</strong> Distribution of transmitted data volume.</li>
+    <li><strong>Event_Type Distribution:</strong> Categorical frequency of event types.</li>
+    </ol>
+
+
+    <figure class="chart">
+    <svg viewBox="0 0 100 50" role="img" aria-label="Bar chart example">
+    <rect x="10" y="25" width="10" height="20" fill="#007bff" />
+    <rect x="30" y="15" width="10" height="30" fill="#00b894" />
+    <rect x="50" y="10" width="10" height="35" fill="#e17055" />
+    <rect x="70" y="30" width="10" height="15" fill="#6c5ce7" />
+    </svg>
+    <figcaption>Illustrative frequency distribution of Login_Attempts.</figcaption>
+    </figure>
+
     </main>
+
+
     <footer class="site-footer">
       <div class="container">
-        <p>&copy; 2025 Cyber Statistics</p>
+        <p>&copy; 2025 CyberStatistics - Statistics for Cybersecurity (A.Y. 2025/26)</p>
       </div>
     </footer>
   </body>

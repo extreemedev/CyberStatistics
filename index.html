@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cyber Statistics</title>
+    <title>CyberStatistics – Statistics for Cybersecurity (A.Y. 2025/26)</title>
     <link rel="stylesheet" href="/CyberStatistics/assets/styles.css">
   </head>
   <body>
     <header class="site-header">
       <div class="container">
-        <h1 class="brand">Cyber Statistics</h1>
+        <h1 class="brand"><a href="/CyberStatistics/index.html" style="text-decoration:none; color:inherit;">CyberStatistics</a></h1>
         <nav aria-label="Main navigation">
           <ul class="nav">
             <li><a href="/CyberStatistics/index.html" aria-current="page">Home</a></li>
             <li><a href="/CyberStatistics/about.html">About</a></li>
-            <li class="nav-folder">
-              <span class="nav-folder-label">Homework ▾</span>
-              <ul class="nav-folder-list">
+            <li class="dropdown">
+              <a href="#">Homework ▾</a>
+              <div class="dropdown-content">
                 <a href="/CyberStatistics/homework/homework1/index.html">Homework 1</a>
                 <a href="/CyberStatistics/homework/homework2/index.html">Homework 2</a>
                 <a href="/CyberStatistics/homework/homework3/index.html">Homework 3</a>
@@ -25,7 +25,7 @@
                 <a href="/CyberStatistics/homework/homework6/index.html">Homework 6</a>
                 <a href="/CyberStatistics/homework/homework7/index.html">Homework 7</a>
                 <a href="/CyberStatistics/homework/homework8/index.html">Homework 8</a>
-              </ul>
+              </div>
             </li>
           </ul>
         </nav>
@@ -33,15 +33,53 @@
     </header>
 
     <main class="container" id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <h2 id="hero-title">Welcome to <span style="color: var(--primary-blue);">Statistics for Cybersecurity</span></h2>
+        <p class="lead">Academic Year 2025/2026 – A foundational course exploring how statistical reasoning, probabilistic modeling, and data analysis can be applied to detect, prevent, and understand cyber threats.</p>
+      </section>
 
-    <h2>Welcome to Cyber Statistics</h2>
-    <p>This website is dedicated to sharing insights and analyses on various topics in cybersecurity through statistical methods.</p>
-    <p>Explore our homework assignments to see practical applications of statistical techniques in cybersecurity contexts.</p>
+      <section class="content" aria-labelledby="intro">
+        <h3 id="intro">Course Overview</h3>
+        <p>The <strong>Statistics for Cybersecurity</strong> course provides students with a deep understanding of how statistical techniques can be leveraged in network defense and cyber threat detection. Through practical assignments, you will analyze datasets, model uncertainty, and evaluate anomalies that indicate malicious behavior.</p>
+        <p>Throughout this course, students will learn how to use descriptive and inferential statistics, probability distributions, and correlation measures to improve cybersecurity posture and data-driven decision-making.</p>
+      </section>
 
+      <section class="content" aria-labelledby="topics">
+        <h3 id="topics">Core Topics</h3>
+        <ul>
+          <li>Understanding and building <strong>datasets</strong> for cybersecurity analysis</li>
+          <li>Exploring <strong>probability distributions</strong> in network events</li>
+          <li>Detecting anomalies with <strong>statistical intrusion detection systems</strong></li>
+          <li>Correlation and regression applied to threat intelligence data</li>
+        </ul>
+      </section>
+
+      <section class="content" aria-labelledby="objectives">
+        <h3 id="objectives">Learning Objectives</h3>
+        <p>By the end of this course, students will be able to:</p>
+        <ul>
+          <li>Design and interpret statistical models to detect abnormal network behavior.</li>
+          <li>Use distributions and hypothesis testing to identify cyber anomalies.</li>
+          <li>Apply data visualization and probabilistic reasoning in threat analysis.</li>
+          <li>Understand how NGFWs, IDS, and IPS leverage statistics to enhance protection.</li>
+        </ul>
+      </section>
+
+      <section class="references" aria-labelledby="refs-title">
+        <h3 id="refs-title">References</h3>
+        <ol>
+          <li>NIST Special Publication 800-94, <em>Guide to Intrusion Detection and Prevention Systems (IDPS)</em> (2007). Available: <a href="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-94.pdf" target="_blank" rel="noopener">https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-94.pdf</a></li>
+          <li>Khraisat, A. et al., "Survey of intrusion detection systems: techniques, datasets and challenges" (2019). SpringerOpen. Available: <a href="https://cybersecurity.springeropen.com/articles/10.1186/s42400-019-0038-7" target="_blank" rel="noopener">https://cybersecurity.springeropen.com/articles/10.1186/s42400-019-0038-7</a></li>
+          <li>Palo Alto Networks, "What is an Intrusion Prevention System (IPS)?" — Cyberpedia. Available: <a href="https://www.paloaltonetworks.com/cyberpedia/what-is-an-intrusion-prevention-system-ips" target="_blank" rel="noopener">https://www.paloaltonetworks.com/cyberpedia/what-is-an-intrusion-prevention-system-ips</a></li>
+          <li>Suricata IDS/IPS project — Features and documentation. Available: <a href="https://suricata.io/" target="_blank" rel="noopener">https://suricata.io/</a></li>
+          <li>NIST publication: "Anomaly Based Intrusion Detection using Large Language Models" (2024). Available: <a href="https://www.nist.gov/publications/anomaly-based-intrusion-detection-using-large-language-models" target="_blank" rel="noopener">https://www.nist.gov/publications/anomaly-based-intrusion-detection-using-large-language-models</a></li>
+        </ol>
+      </section>
     </main>
+
     <footer class="site-footer">
       <div class="container">
-        <p>&copy; 2025 Cyber Statistics</p>
+        <p>&copy; 2025 CyberStatistics - Statistics for Cybersecurity (A.Y. 2025/26)</p>
       </div>
     </footer>
   </body>
