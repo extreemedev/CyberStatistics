@@ -107,6 +107,59 @@
     <figcaption>Illustrative frequency distribution of Login_Attempts.</figcaption>
     </figure>
 
+
+    <section class="content">
+      <h2>1. Enter Text</h2>
+      <textarea id="textInput" rows="6" style="width:100%; border-radius:8px; padding:1rem;" placeholder="Enter your text here..."></textarea>
+      <button id="analyzeBtn" style="margin-top:1rem; padding:0.6rem 1.2rem; background:var(--primary-blue); color:#fff; border:none; border-radius:6px; cursor:pointer;">Analyze</button>
+    </section>
+
+    <section class="content">
+      <h2>2. Letter Frequency Chart</h2>
+      <div id="chartContainer" style="position: relative; height: 400px; width: 100%;">
+        <canvas id="letterChart"></canvas>
+      </div>
+    </section>
+
+    <section class="content">
+      <h2>3. Caesar Cipher Encryption</h2>
+      <p>
+        The <strong>Caesar cipher</strong> is one of the simplest encryption techniques, 
+        where each letter in the plaintext is shifted by a fixed number of positions in the alphabet.
+      </p>
+    
+      <label for="shiftSelect"><strong>Select Shift (1–25):</strong></label>
+      <input type="number" id="shiftSelect" min="1" max="25" value="3" style="margin-left: 0.5rem; width: 60px; padding: 0.3rem;" />
+    
+      <button id="encryptBtn" style="margin-left:1rem; padding:0.6rem 1.2rem; background:var(--primary-blue); color:#fff; border:none; border-radius:6px; cursor:pointer;">
+        Encrypt Text
+      </button>
+    
+      <div id="encryptedOutput" style="margin-top:1.5rem; padding:1rem; background:rgba(255,255,255,0.6); border-radius:8px; white-space:pre-wrap;">
+        <em>The encrypted text will appear here...</em>
+      </div>
+    </section>
+
+  <section class="content">
+  <h2>4. Brute-Force Decryption (Unknown Shift)</h2>
+  <p>
+    When the shift used in the Caesar Cipher is unknown, we can try all 25 possible shifts to recover the original text.
+  </p>
+
+  <button id="bruteforceBtn"
+          style="margin-top:0.5rem; padding:0.6rem 1.2rem; background:var(--accent-orange);
+                 color:#fff; border:none; border-radius:6px; cursor:pointer;">
+    Run Brute-Force
+  </button>
+
+  <div id="bruteResults"
+       style="margin-top:1.5rem; padding:1rem; background:rgba(255,255,255,0.6);
+              border-radius:8px; white-space:pre-wrap; overflow-x:auto; max-height:400px; overflow-y:auto;">
+    <em>The brute-force results will appear here...</em>
+  </div>
+  </section>
+
+
     </main>
 
 
@@ -115,5 +168,9 @@
         <p>&copy; 2025 CyberStatistics - Statistics for Cybersecurity (A.Y. 2025/26)</p>
       </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/CyberStatistics/homework/homework2/main.js" defer></script>
+
   </body>
 </html>
