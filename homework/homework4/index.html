@@ -1,51 +1,176 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CyberStatistics - Homework 4</title>
-    <link rel="stylesheet" href="/CyberStatistics/assets/styles.css">
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <h1 class="brand"><a href="/CyberStatistics/index.html" style="text-decoration:none; color:inherit;">CyberStatistics</a></h1>
-        <nav aria-label="Main navigation">
-          <ul class="nav">
-            <li><a href="/CyberStatistics/index.html">Home</a></li>
-            <li><a href="/CyberStatistics/about.html">About</a></li>
-            <li class="dropdown">
-              <a href="#">Homework ▾</a>
-              <div class="dropdown-content">
-                <a href="/CyberStatistics/homework/homework1/index.html">Homework 1</a>
-                <a href="/CyberStatistics/homework/homework2/index.html">Homework 2</a>
-                <a href="/CyberStatistics/homework/homework3/index.html">Homework 3</a>
-                <a href="/CyberStatistics/homework/homework4/index.html" aria-current="page">Homework 4</a>
-                <a href="/CyberStatistics/homework/homework5/index.html">Homework 5</a>
-                <a href="/CyberStatistics/homework/homework6/index.html">Homework 6</a>
-                <a href="/CyberStatistics/homework/homework7/index.html">Homework 7</a>
-                <a href="/CyberStatistics/homework/homework8/index.html">Homework 8</a>
-              </div>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-    
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CyberStatistics - Homework 4</title>
+  <link rel="stylesheet" href="/CyberStatistics/assets/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">
+        <a href="/CyberStatistics/index.html" style="text-decoration:none; color:inherit;">CyberStatistics</a>
+      </h1>
+      <nav aria-label="Main navigation">
+        <ul class="nav">
+          <li><a href="/CyberStatistics/index.html">Home</a></li>
+          <li><a href="/CyberStatistics/about.html">About</a></li>
+          <li class="dropdown">
+            <a href="#">Homework ▾</a>
+            <div class="dropdown-content">
+              <a href="/CyberStatistics/homework/homework1/index.html">Homework 1</a>
+              <a href="/CyberStatistics/homework/homework2/index.html">Homework 2</a>
+              <a href="/CyberStatistics/homework/homework3/index.html">Homework 3</a>
+              <a href="/CyberStatistics/homework/homework4/index.html" aria-current="page">Homework 4</a>
+              <a href="/CyberStatistics/homework/homework5/index.html">Homework 5</a>
+              <a href="/CyberStatistics/homework/homework6/index.html">Homework 6</a>
+              <a href="/CyberStatistics/homework/homework7/index.html">Homework 7</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <main class="container" id="main">
+  <main class="container" id="main">
     <section class="hero" aria-labelledby="hero-title">
-    <h2 id="hero-title">Homework 4</h2>
-    <p class="lead">Homework 4 will be published here</p>
+      <h2 id="hero-title">Homework 4: Law of Large Numbers</h2>
+      <p class="lead">
+        Law of Large Numbers simulation and visualization of relative frequency convergence in different trials.
+      </p>
     </section>
 
-    </main>
+    <section class="content" aria-labelledby="assignment">
+			<h3>Assignment</h3>
+			<p>
+				Simulate the Law of Large Numbers (LLN) by plotting multiple (m) trajectories of (n) trials for the relative frequency f(n). 
+        Show with a histogram how, as n becomes large, the empirical distribution of f(n) over all m trajectories tends to the underlying probability p of success.
+			</p>
+		</section>
 
+    <section class="content" aria-labelledby="what-is-lln">
+      <h2 id="what-is-lln">1. What is the Law of Large Numbers?</h2>
+      <p>
+        The <strong>Law of Large Numbers (LLN)</strong> is a fundamental theorem in probability theory that describes the result of performing 
+        the same experiment a large number of times. It states that as the number of trials increases, the sample average (relative frequency) 
+        converges to the expected value (theoretical probability).
+      </p>
+      <p>
+        Mathematically, if \( X_1, X_2, \ldots, X_n \) are independent and identically distributed random variables with expected value \( \mu \), then:
+      </p>
+      <p style="text-align:center; font-size:1.1rem; margin:1rem 0;">
+        \( \lim_{n \to \infty} \frac{1}{n} \sum_{i=1}^{n} X_i = \mu \)
+      </p>
+      <p>
+        In this simulation, we observe Bernoulli trials (coin flips) where each trial has probability \( p \) of success. 
+        The relative frequency \( f(n) = \frac{\text{number of successes}}{n} \) will converge to \( p \) as \( n \) increases.
+      </p>
+    </section>
 
-    <footer class="site-footer">
-      <div class="container">
-        <p>&copy; 2025 CyberStatistics - Statistics for Cybersecurity (A.Y. 2025/26)</p>
+    <section class="content" aria-labelledby="simulation-controls">
+      <h2 id="simulation-controls">2. Simulation Parameters</h2>
+      
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-top:1rem;">
+        <div>
+          <label for="probSuccess">Probability of success (p)</label>
+          <input type="number" id="probSuccess" class="input" min="0" max="1" step="0.01" value="0.5">
+          <small style="color:var(--muted);">Range: 0 to 1</small>
+        </div>
+        <div>
+          <label for="numTrajectories">Number of trajectories (m)</label>
+          <input type="number" id="numTrajectories" class="input" min="1" max="100" step="1" value="20">
+          <small style="color:var(--muted);">Range: 1 to 100</small>
+        </div>
+        <div>
+          <label for="numTrials">Number of trials per trajectory (n)</label>
+          <input type="number" id="numTrials" class="input" min="10" max="10000" step="10" value="1000">
+          <small style="color:var(--muted);">Range: 10 to 10000</small>
+        </div>
       </div>
-    </footer>
-  </body>
+
+      <div style="margin-top:1.5rem;">
+        <button id="runSimulation"
+          style="padding:0.6rem 1.5rem; background:var(--primary-blue); color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:1rem;">
+          Run Simulation
+        </button>
+        <button id="resetSimulation"
+          style="margin-left:0.8rem; padding:0.6rem 1.5rem; background:var(--muted); color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:1rem;">
+          Reset
+        </button>
+      </div>
+
+      <div id="simulationStatus" style="margin-top:1rem; padding:1rem; background:rgba(11,105,255,0.05); border-radius:8px; display:none;">
+        <p id="statusText" style="margin:0; color:var(--primary-blue); font-weight:500;"></p>
+      </div>
+    </section>
+
+    <section class="content" aria-labelledby="trajectories-chart">
+      <h2 id="trajectories-chart">3. Relative Frequency Trajectories</h2>
+      <p class="lead">
+        Each line represents one trajectory showing how the relative frequency f(n) evolves as the number of trials increases. 
+        The horizontal dashed line indicates the true probability p.
+      </p>
+      <div id="trajectoriesContainer" style="position: relative; height: 500px; width: 100%; margin-top:1rem;">
+        <canvas id="trajectoriesChart"></canvas>
+      </div>
+    </section>
+
+    <section class="content" aria-labelledby="distribution-chart">
+      <h2 id="distribution-chart">4. Final Distribution at n = max</h2>
+      <p class="lead">
+        This histogram shows the distribution of final relative frequencies f(n) across all m trajectories at the maximum number of trials. 
+        As n increases, this distribution should concentrate around p.
+      </p>
+      <div style="display:grid; grid-template-columns:2fr 1fr; gap:1.5rem; margin-top:1rem;">
+        <div style="position: relative; height: 400px;">
+          <canvas id="distributionChart"></canvas>
+        </div>
+        <div>
+          <h3 style="margin-top:0; font-size:1.1rem; color:var(--primary-blue);">Statistics</h3>
+          <div style="background:rgba(255,255,255,0.1); border-radius:8px; padding:1rem;">
+            <div style="margin-bottom:1rem;">
+              <div style="color:var(--muted); font-size:0.9rem;">True probability (p)</div>
+              <div id="statTrue" style="font-size:1.5rem; font-weight:700; color:var(--primary-blue);">—</div>
+            </div>
+            <div style="margin-bottom:1rem;">
+              <div style="color:var(--muted); font-size:0.9rem;">Mean of f(n)</div>
+              <div id="statMean" style="font-size:1.5rem; font-weight:700; color:var(--accent-orange);">—</div>
+            </div>
+            <div style="margin-bottom:1rem;">
+              <div style="color:var(--muted); font-size:0.9rem;">Std Dev of f(n)</div>
+              <div id="statStd" style="font-size:1.5rem; font-weight:700; color:var(--accent-orange);">—</div>
+            </div>
+            <div>
+              <div style="color:var(--muted); font-size:0.9rem;">Convergence</div>
+              <div id="statConvergence" style="font-size:1rem; font-weight:600; color:var(--primary-blue);">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content" aria-labelledby="interpretation">
+      <h2 id="interpretation">5. Interpretation</h2>
+      <div style="padding:1rem; background:rgba(255,255,255,0.1); border-radius:8px; border-left:4px solid var(--primary-blue);">
+        <h3 style="margin-top:0; font-size:1.1rem;">Key Observations</h3>
+        <ul style="line-height:1.8;">
+          <li><strong>Convergence:</strong> As n increases, individual trajectories converge toward the true probability p.</li>
+          <li><strong>Variance reduction:</strong> The spread (standard deviation) of f(n) across trajectories decreases as n grows, following \( \sigma \propto 1/\sqrt{n} \).</li>
+          <li><strong>Distribution concentration:</strong> The histogram of final frequencies becomes narrower and centered at p for large n.</li>
+          <li><strong>Practical significance:</strong> In cybersecurity, LLN justifies using observed frequencies to estimate attack probabilities, anomaly rates, and other statistical properties from large samples.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 CyberStatistics - Statistics for Cybersecurity A.Y. 2025/26</p>
+    </div>
+  </footer>
+
+  <script src="/CyberStatistics/homework/homework4/main.js" defer></script>
+</body>
 </html>

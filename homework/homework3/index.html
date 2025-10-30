@@ -1,51 +1,207 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CyberStatistics - Homework 3</title>
-    <link rel="stylesheet" href="/CyberStatistics/assets/styles.css">
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <h1 class="brand"><a href="/CyberStatistics/index.html" style="text-decoration:none; color:inherit;">CyberStatistics</a></h1>
-        <nav aria-label="Main navigation">
-          <ul class="nav">
-            <li><a href="/CyberStatistics/index.html">Home</a></li>
-            <li><a href="/CyberStatistics/about.html">About</a></li>
-            <li class="dropdown">
-              <a href="#">Homework ▾</a>
-              <div class="dropdown-content">
-                <a href="/CyberStatistics/homework/homework1/index.html">Homework 1</a>
-                <a href="/CyberStatistics/homework/homework2/index.html">Homework 2</a>
-                <a href="/CyberStatistics/homework/homework3/index.html" aria-current="page">Homework 3</a>
-                <a href="/CyberStatistics/homework/homework4/index.html">Homework 4</a>
-                <a href="/CyberStatistics/homework/homework5/index.html">Homework 5</a>
-                <a href="/CyberStatistics/homework/homework6/index.html">Homework 6</a>
-                <a href="/CyberStatistics/homework/homework7/index.html">Homework 7</a>
-                <a href="/CyberStatistics/homework/homework8/index.html">Homework 8</a>
-              </div>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-    
 
-    <main class="container" id="main">
-    <section class="hero" aria-labelledby="hero-title">
-    <h2 id="hero-title">Homework 3</h2>
-    <p class="lead">Homework 3 will be published here</p>
-    </section>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CyberStatistics - Homework 3</title>
+	<link rel="stylesheet" href="/CyberStatistics/assets/styles.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 
-    </main>
+<body>
+	<header class="site-header">
+		<div class="container">
+			<h1 class="brand">
+				<a href="/CyberStatistics/index.html" style="text-decoration:none; color:inherit;">CyberStatistics</a>
+			</h1>
+			<nav aria-label="Main navigation">
+				<ul class="nav">
+					<li><a href="/CyberStatistics/index.html">Home</a></li>
+					<li><a href="/CyberStatistics/about.html">About</a></li>
+					<li class="dropdown">
+						<a href="#">Homework ▾</a>
+						<div class="dropdown-content">
+							<a href="/CyberStatistics/homework/homework1/index.html">Homework 1</a>
+							<a href="/CyberStatistics/homework/homework2/index.html">Homework 2</a>
+							<a href="/CyberStatistics/homework/homework3/index.html" aria-current="page">Homework 3</a>
+							<a href="/CyberStatistics/homework/homework4/index.html">Homework 4</a>
+							<a href="/CyberStatistics/homework/homework5/index.html">Homework 5</a>
+							<a href="/CyberStatistics/homework/homework6/index.html">Homework 6</a>
+							<a href="/CyberStatistics/homework/homework7/index.html">Homework 7</a>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
 
+	<main class="container" id="main">
+		<section class="hero" aria-labelledby="hero-title">
+			<h2 id="hero-title">Homework 3: RSA Encryption and Cryptanalysis</h2>
+			<p class="lead">
+				RSA Encryption with small primes and cryptanalysis using English letter frequency distribution to
+				decrypt messages without the private key.
+			</p>
+		</section>
 
-    <footer class="site-footer">
-      <div class="container">
-        <p>&copy; 2025 CyberStatistics - Statistics for Cybersecurity (A.Y. 2025/26)</p>
-      </div>
-    </footer>
-  </body>
+		<section class="content" aria-labelledby="assignment">
+			<h3>Assignment</h3>
+			<p>
+				Repeat the same exercise as in Homework II, but this time using RSA encryption/decryption for the
+				letters (using very small and manageable prime numbers p,q, of course). Try to decode the message by
+				analyzing the language's alphabet distribution. Find a good and practical algorithm for this.
+			</p>
+		</section>
+
+		<section class="content" aria-labelledby="what-is-rsa">
+			<h2 id="what-is-rsa">1. What is RSA?</h2>
+			<p>
+				RSA (Rivest-Shamir-Adleman) is a widely used public-key cryptographic system that enables secure data
+				transmission.
+				It relies on the mathematical properties of large prime numbers and modular arithmetic.
+			</p>
+			<p>
+				In RSA, two keys are generated: a <strong>public key</strong> for encryption and a <strong>private
+					key</strong> for decryption.
+				The security of RSA is based on the difficulty of factoring the product of two large prime numbers.
+			</p>
+		</section>
+
+		<section class="content" aria-labelledby="rsa-implementation">
+			<h2 id="rsa-implementation">2. RSA Key Generation</h2>
+
+			<div style="margin-bottom:1rem;">
+				<button id="regenBtn"
+					style="padding:0.6rem 1.2rem; background:var(--primary-blue); color:#fff; border:none; border-radius:6px; cursor:pointer;">
+					Generate New Keys
+				</button>
+			</div>
+
+			<div
+				style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:0.75rem; align-items:end;">
+				<div>
+					<label for="primeP">Prime p</label>
+					<input type="text" id="primeP" class="input" readonly>
+				</div>
+				<div>
+					<label for="primeQ">Prime q</label>
+					<input type="text" id="primeQ" class="input" readonly>
+				</div>
+				<div>
+					<label for="modN">n = p · q</label>
+					<input type="text" id="modN" class="input" readonly>
+				</div>
+				<div>
+					<label for="phiN">φ(n)</label>
+					<input type="text" id="phiN" class="input" readonly>
+				</div>
+				<div>
+					<label for="pubE">Public exponent e</label>
+					<input type="text" id="pubE" class="input" readonly>
+				</div>
+				<div>
+					<label for="privD">Private exponent d</label>
+					<input type="text" id="privD" class="input" readonly>
+				</div>
+			</div>
+
+			<p id="phiExplain" style="margin-top:0.75rem; color:var(--muted);"></p>
+
+			<div
+				style="margin-top:1.5rem; padding:1rem; background:rgba(255,255,255,0.1); border-radius:8px; border-left:4px solid var(--primary-blue);">
+				<h3 style="margin-top:0; font-size:1.1rem;">How the keys are computed</h3>
+				<ol style="margin:0.5rem 0; padding-left:1.5rem; line-height:1.8;">
+					<li><strong>Random primes p and q:</strong> Two distinct small primes are randomly selected to
+						ensure \( n = p \cdot q \geq 29 \).</li>
+					<li><strong>Modulus n:</strong> \( n = p \cdot q \)</li>
+					<li><strong>Totient φ(n):</strong> \( \varphi(n) = (p-1)(q-1) \)</li>
+					<li><strong>Public exponent e:</strong> Smallest coprime with \( \varphi(n) \) from {3,5,17,257}.
+					</li>
+					<li><strong>Private exponent d:</strong> Modular inverse of e, \( d \equiv e^{-1} \pmod{\varphi(n)}
+						\).</li>
+				</ol>
+			</div>
+		</section>
+
+		<section class="content" aria-labelledby="encryption">
+			<h2 id="encryption">3. Encryption (using Public Key)</h2>
+			<p style="color:var(--muted); margin-bottom:1rem;">
+				Encryption uses the <strong>public key (n, e)</strong> to transform plaintext into ciphertext.
+			</p>
+
+			<div style="margin-top:1rem;">
+				<label for="plainText">Plaintext (A–Z and space)</label>
+				<textarea id="plainText" class="textarea" rows="4"
+					style="width:100%;border-radius:8px;padding:1rem;">In cybersecurity, understanding frequency distributions of characters can help with simple cryptanalysis, input sanitization checks, and data profiling.</textarea>
+				<button id="encryptBtn"
+					style="margin-top:0.8rem; padding:0.6rem 1.2rem; background:var(--primary-blue); color:#fff; border:none; border-radius:6px; cursor:pointer;">
+					Encrypt with Public Key (n, e)
+				</button>
+				<textarea id="encryptedText" class="textarea" rows="4"
+					style="width:100%;border-radius:8px;padding:1rem; margin-top:0.8rem;"
+					placeholder="Ciphertext (space-separated integers)..." readonly></textarea>
+			</div>
+		</section>
+
+		<section class="content" aria-labelledby="freq-chart" style="margin-top:1.25rem;">
+			<h2 id="freq-chart">4. Ciphertext Frequency Chart</h2>
+			<div id="chartContainer" style="position: relative; height: 400px; width: 100%;">
+				<canvas id="letterChart"></canvas>
+			</div>
+			<p class="lead" style="margin-top:0.5rem;">
+				The X-axis shows ciphertext tokens (integers) and the Y-axis shows their frequency. This distribution is
+				analyzed for cryptanalysis.
+			</p>
+		</section>
+
+		<section class="content" aria-labelledby="decryption">
+			<h2 id="decryption">5. Decryption Methods</h2>
+
+			<div style="margin-top:1rem;">
+				<h3 style="font-size:1.1rem; color:var(--primary-blue);">Method 1: Private Key Decryption</h3>
+				<p style="color:var(--muted); margin-bottom:1rem;">
+					Standard RSA decryption using the <strong>private key (n, d)</strong>.
+				</p>
+				<button id="decryptBtn"
+					style="margin-top:0.8rem; padding:0.6rem 1.2rem; background:var(--primary-blue); color:#fff; border:none; border-radius:6px; cursor:pointer;">
+					Decrypt with Private Key (n, d)
+				</button>
+				<textarea id="decryptedText" class="textarea" rows="3"
+					style="width:100%;border-radius:8px;padding:1rem; margin-top:0.8rem;"
+					placeholder="Decrypted text using private key..." readonly></textarea>
+			</div>
+
+			<div style="margin-top:2rem;">
+				<h3 style="font-size:1.1rem; color:var(--accent-orange);">Method 2: Frequency Analysis Cryptanalysis
+				</h3>
+				<p style="color:var(--muted); margin-bottom:1rem;">
+					Advanced statistical attack using English letter frequencies, bigram patterns, and common word
+					detection to decrypt without the private key.
+				</p>
+				<button id="distributionDecryptBtn"
+					style="padding:0.6rem 1.2rem; background:var(--accent-orange, #ff7a18); color:#fff; border:none; border-radius:6px; cursor:pointer;">
+					Cryptanalysis Decrypt (Frequency Analysis)
+				</button>
+				<textarea id="distributionDecryptedText" class="textarea" rows="3"
+					style="width:100%;border-radius:8px;padding:1rem; margin-top:0.8rem;"
+					placeholder="Decrypted text using frequency analysis..." readonly></textarea>
+				<div id="analysisDetails"
+					style="margin-top:1rem; padding:1rem; background:rgba(255,122,24,0.05); border-radius:8px; display:none;">
+					<h4 style="margin-top:0; font-size:1rem; color:var(--accent-orange);">Analysis Details</h4>
+					<p id="analysisInfo" style="font-size:0.9rem; color:var(--muted);"></p>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container">
+			<p>© 2025 CyberStatistics - Statistics for Cybersecurity A.Y. 2025/26</p>
+		</div>
+	</footer>
+
+	<script src="/CyberStatistics/homework/homework3/main.js" defer></script>
+</body>
+
 </html>
