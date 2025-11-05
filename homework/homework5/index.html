@@ -1,51 +1,389 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CyberStatistics - Homework 5</title>
-    <link rel="stylesheet" href="/CyberStatistics/assets/styles.css">
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <h1 class="brand"><a href="/CyberStatistics/index.html" style="text-decoration:none; color:inherit;">CyberStatistics</a></h1>
-        <nav aria-label="Main navigation">
-          <ul class="nav">
-            <li><a href="/CyberStatistics/index.html">Home</a></li>
-            <li><a href="/CyberStatistics/about.html">About</a></li>
-            <li class="dropdown">
-              <a href="#">Homework ▾</a>
-              <div class="dropdown-content">
-                <a href="/CyberStatistics/homework/homework1/index.html">Homework 1</a>
-                <a href="/CyberStatistics/homework/homework2/index.html">Homework 2</a>
-                <a href="/CyberStatistics/homework/homework3/index.html">Homework 3</a>
-                <a href="/CyberStatistics/homework/homework4/index.html">Homework 4</a>
-                <a href="/CyberStatistics/homework/homework5/index.html" aria-current="page">Homework 5</a>
-                <a href="/CyberStatistics/homework/homework6/index.html">Homework 6</a>
-                <a href="/CyberStatistics/homework/homework7/index.html">Homework 7</a>
-                <a href="/CyberStatistics/homework/homework8/index.html">Homework 8</a>
-              </div>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-    
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CyberStatistics - Homework 5</title>
+  <link rel="stylesheet" href="/CyberStatistics/assets/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">
+        <a href="/CyberStatistics/index.html" style="text-decoration:none; color:inherit;">
+          CyberStatistics
+        </a>
+      </h1>
+      <nav aria-label="Main navigation">
+        <ul class="nav">
+          <li><a href="/CyberStatistics/index.html">Home</a></li>
+          <li><a href="/CyberStatistics/about.html">About</a></li>
+          <li class="dropdown">
+            <a href="#">Homework ▾</a>
+            <div class="dropdown-content">
+              <a href="/CyberStatistics/homework/homework1/index.html">Homework 1</a>
+              <a href="/CyberStatistics/homework/homework2/index.html">Homework 2</a>
+              <a href="/CyberStatistics/homework/homework3/index.html">Homework 3</a>
+              <a href="/CyberStatistics/homework/homework4/index.html">Homework 4</a>
+              <a href="/CyberStatistics/homework/homework5/index.html" aria-current="page">Homework 5</a>
+              <a href="/CyberStatistics/homework/homework6/index.html">Homework 6</a>
+              <a href="/CyberStatistics/homework/homework7/index.html">Homework 7</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <main class="container" id="main">
-    <section class="hero" aria-labelledby="hero-title">
-    <h2 id="hero-title">Homework 5</h2>
-    <p class="lead">Homework 5 will be published here</p>
+  <main class="container" id="main">
+    <section class="hero" aria-labelledby="hw5-title">
+      <h2 id="hw5-title">Homework 5: Measures of Location and Dispersion</h2>
+      <p class="lead">
+        Research and discuss the main concepts and methods for measuring location (central tendency) and dispersion in statistics. Explore their definitions, uses, and limitations in practical scenarios. Interactively compute and visualize these measures for your data samples.
+      </p>
     </section>
 
-    </main>
+    <section class="content" aria-labelledby="intro">
+      <h2 id="intro">1. Introduction & Concepts</h2>
+      <p>
+        Measures of <strong>location</strong> and <strong>dispersion</strong> are fundamental concepts in statistics. 
+        <br />
+        <span style="display:block;margin-top:0.8em;">
+          <strong>Location</strong> measures indicate where data tend to cluster. The most common types are:
+        </span>
+      </p>
+      <ul style="line-height:1.8;">
+        <li><strong>Arithmetic Mean (average):</strong> Sum of all values divided by number of values. Sensitive to outliers.</li>
+        <li><strong>Median:</strong> Middle value when data are ordered. Robust to outliers and skewed distributions.</li>
+        <li><strong>Mode:</strong> Most frequently occurring value(s). Useful for categorical data or multi-modal distributions.</li>
+      </ul>
+      <p style="margin-top:0.8em;">
+        <strong>Dispersion</strong> measures describe the spread of the data. Common types include:
+      </p>
+      <ul style="line-height:1.8;">
+        <li><strong>Variance:</strong> Average squared deviation from the mean. Indicates data spread but in squared units.</li>
+        <li><strong>Standard Deviation:</strong> Square root of variance. Same units as the data—most used for normal distributions.</li>
+        <li><strong>Interquartile Range (IQR):</strong> Difference between 75th and 25th percentile values. Robust against outliers.</li>
+      </ul>
+    </section>
 
-
-    <footer class="site-footer">
-      <div class="container">
-        <p>&copy; 2025 CyberStatistics - Statistics for Cybersecurity (A.Y. 2025/26)</p>
+    <section class="content" aria-labelledby="formulas">
+      <h2 id="formulas">2. Mathematical Formulas & Properties</h2>
+      <div style="padding:1rem; background:rgba(255,255,255,0.07); border-radius:8px; overflow-x:auto;">
+        <table style="width:100%;font-size:0.95rem;min-width:600px;">
+          <thead>
+            <tr style="border-bottom:2px solid rgba(11,105,255,0.3);">
+              <th style="text-align:left;padding:0.5rem;">Name</th>
+              <th style="text-align:left;padding:0.5rem;">Formula</th>
+              <th style="text-align:left;padding:0.5rem;">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:0.5rem;">Arithmetic Mean</td>
+              <td style="padding:0.5rem;">\( \overline{x} = \frac{1}{n} \sum_{i=1}^n x_i \)</td>
+              <td style="padding:0.5rem;">Best for symmetric/normal distributions</td>
+            </tr>
+            <tr>
+              <td style="padding:0.5rem;">Median</td>
+              <td style="padding:0.5rem;">Middle value of ordered set</td>
+              <td style="padding:0.5rem;">Best for skewed or outlier-prone data</td>
+            </tr>
+            <tr>
+              <td style="padding:0.5rem;">Mode</td>
+              <td style="padding:0.5rem;">Most frequent value(s)</td>
+              <td style="padding:0.5rem;">Can be no mode, or multiple modes</td>
+            </tr>
+            <tr>
+              <td style="padding:0.5rem;">Variance</td>
+              <td style="padding:0.5rem;">\( \sigma^2 = \frac{1}{n} \sum_{i=1}^n (x_i - \overline{x})^2 \)</td>
+              <td style="padding:0.5rem;">Main measure of spread; in squared units</td>
+            </tr>
+            <tr>
+              <td style="padding:0.5rem;">Std Deviation</td>
+              <td style="padding:0.5rem;">\( \sigma = \sqrt{ \text{Variance} } \)</td>
+              <td style="padding:0.5rem;">Most interpretable for normal data</td>
+            </tr>
+            <tr>
+              <td style="padding:0.5rem;">Interquartile Range</td>
+              <td style="padding:0.5rem;">\( \text{IQR} = Q_3 - Q_1 \)</td>
+              <td style="padding:0.5rem;">Robust to outliers; non-parametric</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </footer>
-  </body>
+    </section>
+
+    <section class="content" aria-labelledby="demo">
+      <h2 id="demo">3. Interactive Demo</h2>
+      <p>
+        Enter your data below (comma or space separated) or generate random sample data. Visualize basic statistics and histograms for location and dispersion.
+      </p>
+      <div style="margin-top:1rem;">
+        <textarea id="sampleData" class="textarea" rows="5" style="width:100%;border-radius:8px;padding:1rem;"
+          placeholder="Enter sample data, e.g. 5, 8, 4, 8, 9, 7, 2, 3"></textarea>
+        <div style="display:flex; gap:1rem; margin-top:0.8rem; flex-wrap:wrap;">
+          <button id="computeStats"
+            style="padding:0.6rem 1.4rem; background:var(--primary-blue); color:#fff; border:none; border-radius:6px; cursor:pointer;">
+            Compute & Visualize Statistics
+          </button>
+          <button id="loadRandomBtn"
+            style="padding:0.6rem 1.4rem; background:var(--accent-orange); color:#fff; border:none; border-radius:6px; cursor:pointer;">
+            Load Random Data
+          </button>
+        </div>
+      </div>
+
+      <section style="margin-top:2rem;">
+        <h3 style="font-size:1.1rem; color:var(--primary-blue);">Computed Statistics</h3>
+        <div id="resultsGrid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem; margin:1rem 0; width:100%; box-sizing:border-box;">
+          <div class="card" style="min-width:0; overflow:hidden;">
+            <div class="card-title">Mean</div>
+            <div class="stat-number" id="meanValue" style="word-break:break-word;">–</div>
+          </div>
+          <div class="card" style="min-width:0; overflow:hidden;">
+            <div class="card-title">Median</div>
+            <div class="stat-number" id="medianValue" style="word-break:break-word;">–</div>
+          </div>
+          <div class="card" style="min-width:0; overflow:hidden;">
+            <div class="card-title">Mode</div>
+            <div class="stat-number" id="modeValue" style="word-break:break-word;">–</div>
+          </div>
+          <div class="card" style="min-width:0; overflow:hidden;">
+            <div class="card-title">Std Dev</div>
+            <div class="stat-number" id="stdValue" style="word-break:break-word;">–</div>
+          </div>
+          <div class="card" style="min-width:0; overflow:hidden;">
+            <div class="card-title">Variance</div>
+            <div class="stat-number" id="varValue" style="word-break:break-word;">–</div>
+          </div>
+          <div class="card" style="min-width:0; overflow:hidden;">
+            <div class="card-title">IQR</div>
+            <div class="stat-number" id="iqrValue" style="word-break:break-word;">–</div>
+          </div>
+        </div>
+      </section>
+      
+      <section style="margin-top:2rem;">
+        <h3 style="font-size:1.1rem; color:var(--accent-orange);">Histogram</h3>
+        <div style="width:100%; max-width:100%; overflow:hidden;">
+          <div style="position:relative; height:350px; width:100%;">
+            <canvas id="histogramChart"></canvas>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="content" aria-labelledby="discussion">
+      <h2 id="discussion">4. Uses, Advantages, Limitations</h2>
+      <ul style="line-height:2;">
+        <li>
+          <b>Mean</b> is widely used in economics, engineering, and science for its simplicity and mathematical convenience. It is optimal for Gaussian distributions but can be skewed by outliers.
+        </li>
+        <li>
+          <b>Median</b> excels in finance and income statistics where data are skewed or outliers abound—robust but ignores data distribution shape.
+        </li>
+        <li>
+          <b>Mode</b> is vital in market basket analysis, categorical survey data, and anomaly detection—yet rarely unique.
+        </li>
+        <li>
+          <b>Variance & Std Dev</b> quantify the risk, volatility, or reliability of measurements, underpin hypothesis testing and confidence intervals. Sensitive to outliers, std dev best for symmetric data.
+        </li>
+        <li>
+          <b>IQR</b> is commonly used in exploratory data analysis, boxplots, and non-parametric tests. Excellent for highlighting spread & outliers, but does not reveal full distribution shape.
+        </li>
+      </ul>
+    </section>
+
+    <section class="content" aria-labelledby="network-security">
+      <h2 id="network-security">5. Applications in Network Security & Cybersecurity</h2>
+      
+      <p>
+        Statistical measures of location and dispersion play a critical role in modern network security and cybersecurity operations. 
+        These measures are foundational for anomaly detection, threat assessment, and predictive analytics in Security Operations Centers (SOCs).
+      </p>
+
+      <h3 style="color:var(--primary-blue); margin-top:1.5rem;">Network Traffic Analysis & Anomaly Detection</h3>
+      
+      <div style="padding:1.25rem; background:rgba(11,105,255,0.05); border-radius:8px; border-left:4px solid var(--primary-blue); margin:1rem 0;">
+        <h4 style="margin-top:0; font-size:1rem;">Statistical Baseline Establishment</h4>
+        <p style="line-height:1.8; margin:0.5rem 0;">
+          Security systems use <strong>mean and standard deviation</strong> to establish baselines of normal network behavior. 
+          For example, typical packet sizes, traffic volume, connection rates, and protocol distributions are tracked over time.
+          Anomalies are flagged when current measurements deviate significantly from these baselines—commonly defined as 
+          values exceeding 3-5 standard deviations from the mean.
+        </p>
+        <p style="line-height:1.8; margin:0.5rem 0;">
+          <strong>Use case:</strong> A network normally processes 500 Mbps with σ = 50 Mbps. A sudden spike to 900 Mbps 
+          (8 standard deviations above mean) triggers an immediate alert for potential DDoS attack or data exfiltration.
+        </p>
+      </div>
+
+      <div style="padding:1.25rem; background:rgba(255,122,24,0.05); border-radius:8px; border-left:4px solid var(--accent-orange); margin:1rem 0;">
+        <h4 style="margin-top:0; font-size:1rem;">Anomaly Score Calculation</h4>
+        <p style="line-height:1.8; margin:0.5rem 0;">
+          Modern intrusion detection systems compute <strong>anomaly scores</strong> using variance and standard deviation. 
+          Research shows anomaly scores ranging from 0-100 with mean ≈ 50 and SD ≈ 29, where higher scores indicate greater 
+          deviation from normal behavior. These scores help prioritize security alerts and allocate analyst resources effectively.
+        </p>
+        <p style="line-height:1.8; margin:0.5rem 0;">
+          <strong>Advantage:</strong> Variance-based scoring provides a quantitative, objective measure of threat severity, 
+          reducing reliance on subjective judgment and enabling automated response systems.
+        </p>
+      </div>
+
+      <h3 style="color:var(--primary-blue); margin-top:1.5rem;">Specific Applications by Measure</h3>
+      
+      <div style="display:grid; grid-template-columns:1fr; gap:1.25rem; margin:1.5rem 0;">
+        
+        <div style="border:1px solid rgba(11,105,255,0.2); border-radius:8px; padding:1.25rem;">
+          <h4 style="margin-top:0; color:var(--primary-blue);">Mean & Median in Threat Detection</h4>
+          <ul style="line-height:1.8; margin:0.5rem 0;">
+            <li><strong>Packet Length Analysis:</strong> Mean packet size helps identify protocol anomalies and potential attacks. 
+            Research shows packet length distributions with specific means can distinguish between normal traffic and malware communication.</li>
+            <li><strong>Response Time Monitoring:</strong> Median response time is preferred over mean for detecting performance degradation 
+            caused by attacks, as it's robust to outliers from legitimate large transactions.</li>
+            <li><strong>Connection Duration:</strong> Median connection duration identifies botnets or persistent threats that maintain 
+            abnormally long or short connections compared to baseline.</li>
+          </ul>
+          <p style="margin-top:1rem; padding:0.75rem; background:rgba(11,105,255,0.08); border-radius:6px; font-size:0.95rem;">
+            <strong>Limitation:</strong> Mean is sensitive to outliers—a single massive data transfer can skew averages. 
+            This is why median is often preferred for traffic analysis in the presence of attack traffic.
+          </p>
+        </div>
+
+        <div style="border:1px solid rgba(255,122,24,0.2); border-radius:8px; padding:1.25rem;">
+          <h4 style="margin-top:0; color:var(--accent-orange);">Variance & Standard Deviation in Security Analytics</h4>
+          <ul style="line-height:1.8; margin:0.5rem 0;">
+            <li><strong>Traffic Variability Detection:</strong> High variance in packet inter-arrival times can indicate network scanning, 
+            port sweeping, or reconnaissance activities.</li>
+            <li><strong>Dynamic Threshold Setting:</strong> Security systems use \( \mu \pm k\sigma \) (typically k=3 or 5) to set 
+            adaptive thresholds that adjust to network patterns, reducing false positives during legitimate traffic spikes.</li>
+            <li><strong>Protocol Behavior Profiling:</strong> Standard deviation of protocol-specific metrics (e.g., TCP flag combinations, 
+            DNS query rates) helps detect protocol abuse and tunneling attacks.</li>
+            <li><strong>Temporal Pattern Analysis:</strong> Variance over time windows identifies periodic attacks, such as time-based 
+            malware callbacks or coordinated DDoS waves.</li>
+          </ul>
+          <p style="margin-top:1rem; padding:0.75rem; background:rgba(255,122,24,0.08); border-radius:6px; font-size:0.95rem;">
+            <strong>Advantage:</strong> Variance-based methods scale well to high-speed networks and can be computed incrementally 
+            in real-time with low computational overhead.
+          </p>
+        </div>
+
+        <div style="border:1px solid rgba(11,105,255,0.2); border-radius:8px; padding:1.25rem;">
+          <h4 style="margin-top:0; color:var(--primary-blue);">IQR in Outlier & Attack Detection</h4>
+          <ul style="line-height:1.8; margin:0.5rem 0;">
+            <li><strong>Robust Outlier Detection:</strong> IQR-based methods (values < Q1 - 1.5×IQR or > Q3 + 1.5×IQR are outliers) 
+            identify anomalous hosts, unusual data volumes, and suspicious access patterns without being skewed by extreme values.</li>
+            <li><strong>Insider Threat Detection:</strong> User behavior analytics use IQR to flag unusual access times, 
+            data download volumes, or privilege escalations that fall outside typical employee behavior ranges.</li>
+            <li><strong>Zero-Day Attack Detection:</strong> Since IQR doesn't assume specific distributions, it's effective for 
+            detecting novel attacks with unknown signatures by focusing on behavioral deviations.</li>
+          </ul>
+          <p style="margin-top:1rem; padding:0.75rem; background:rgba(11,105,255,0.08); border-radius:6px; font-size:0.95rem;">
+            <strong>Limitation:</strong> IQR ignores tail behavior—extreme attacks far beyond Q3 might be missed if they're 
+            too sparse. Complementing with variance-based methods provides better coverage.
+          </p>
+        </div>
+
+        <div style="border:1px solid rgba(255,122,24,0.2); border-radius:8px; padding:1.25rem;">
+          <h4 style="margin-top:0; color:var(--accent-orange);">Mode in Security Context</h4>
+          <ul style="line-height:1.8; margin:0.5rem 0;">
+            <li><strong>Attack Type Identification:</strong> Mode identifies the most frequent attack vectors in honeynets and threat intelligence feeds.</li>
+            <li><strong>Port Scanning Detection:</strong> Most frequently accessed ports reveal scanning patterns and target services.</li>
+            <li><strong>Error Code Analysis:</strong> Modal HTTP/DNS error codes help identify misconfiguration, reconnaissance, or automated attacks.</li>
+            <li><strong>Geo-location Patterns:</strong> Mode of source countries/regions identifies coordinated attack campaigns.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="color:var(--primary-blue); margin-top:1.5rem;">Real-World Implementation & Research Findings</h3>
+      
+      <div style="padding:1.25rem; background:rgba(255,255,255,0.05); border-radius:8px; margin:1rem 0;">
+        <ul style="line-height:2; margin:0;">
+          <li><strong>Statistical Anomaly Detection Systems:</strong> Studies show AI-enhanced statistical methods achieve F1 scores 
+          up to 1.0 in detecting wireless network intrusions when combining exponential smoothing with variance-based thresholds.</li>
+          
+          <li><strong>Predictive Analytics in SOCs:</strong> Analysis of 2,000+ network traffic records demonstrates that anomaly scores 
+          (using variance and standard deviation) significantly improve threat detection rates and reduce false positives when combined 
+          with contextual features like user behavior and temporal patterns.</li>
+          
+          <li><strong>Network Flow Analysis:</strong> Research on variance-to-mean ratios in network traffic shows that flows with 
+          variance outside 3σ range indicate DDoS attacks, port scans, or malware propagation with high confidence.</li>
+          
+          <li><strong>Machine Learning Integration:</strong> Unsupervised ML models (Isolation Forest, One-Class SVM) trained on 
+          statistical features (mean, variance, IQR) of network flows detect zero-day exploits and insider threats 
+          that signature-based systems miss.</li>
+          
+          <li><strong>Long-Range Dependence Analysis:</strong> Variance-based methods (Modified Allan Variance, Variance-Time plots) 
+          detect self-similar traffic patterns associated with botnet coordination and command-and-control channels.</li>
+        </ul>
+      </div>
+
+      <h3 style="color:var(--accent-orange); margin-top:1.5rem;">Best Practices & Recommendations</h3>
+      
+      <div style="padding:1.25rem; background:rgba(255,122,24,0.05); border-radius:8px; border-left:4px solid var(--accent-orange);">
+        <ol style="line-height:2; margin:0;">
+          <li><strong>Use Multiple Measures:</strong> Combine mean/median with variance/IQR for comprehensive coverage. 
+          No single statistic captures all attack types.</li>
+          
+          <li><strong>Adaptive Baselines:</strong> Update statistical baselines periodically (daily, weekly) to account for 
+          legitimate traffic evolution and seasonal patterns.</li>
+          
+          <li><strong>Context-Aware Thresholds:</strong> Set different thresholds for different services, times of day, 
+          and user groups. A 5σ spike at 3 AM is more suspicious than during business hours.</li>
+          
+          <li><strong>Multi-Layer Analysis:</strong> Apply statistical methods at multiple levels—packet, flow, session, 
+          and user—for hierarchical threat detection.</li>
+          
+          <li><strong>Combine with ML:</strong> Use statistical features as inputs to machine learning models for enhanced 
+          accuracy and automated threat classification.</li>
+          
+          <li><strong>Validate & Tune:</strong> Continuously measure false positive/negative rates and adjust thresholds. 
+          Research shows tuning can improve detection rates by 20-40%.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="content" aria-labelledby="references">
+      <h2 id="references">References</h2>
+      <div style="padding:1rem; background:rgba(255,255,255,0.03); border-radius:8px;">
+        <ol style="line-height:2; font-size:0.9rem;">
+          <li>IIETA (2024). "Statistical Anomaly Detection for Enhanced Cybersecurity: AI-Based Analysis of Wireless Network Intrusions." <a href="https://www.iieta.org/download/file/fid/145244" target="_blank" style="color:var(--primary-blue);">https://www.iieta.org/download/file/fid/145244</a></li>
+          
+          <li>ArXiv (2024). "Enhancing Cyber Security Through Predictive Analytics: A Hybrid SMOTE-ENN-GSCV Model for Anomaly Score." <a href="https://arxiv.org/pdf/2407.10864.pdf" target="_blank" style="color:var(--primary-blue);">https://arxiv.org/pdf/2407.10864.pdf</a></li>
+          
+          <li>Kentik (2025). "Network Anomaly Detection: A Comprehensive Guide." <a href="https://www.kentik.com/kentipedia/network-anomaly-detection/" target="_blank" style="color:var(--primary-blue);">https://www.kentik.com/kentipedia/network-anomaly-detection/</a></li>
+          
+          <li>The Science and Information Organization (2024). "Enhancing Cyber Security Through Predictive Analytics: A Hybrid Model for Improved Anomaly Score Detection." <a href="https://thesai.org/Downloads/Volume16No8/Paper_4-Enhancing_Cyber_Security_Through_Predictive_Analytics.pdf" target="_blank" style="color:var(--primary-blue);">https://thesai.org/Downloads/Volume16No8/</a></li>
+          
+          <li>The Science and Information Organization (2025). "Research of Network Flow Based on Statistical Analysis Methods." <a href="https://thesai.org/Downloads/Volume16No6/Paper_18-Research_of_Network_Flow_Based_on_Statistical_Analysis_Methods.pdf" target="_blank" style="color:var(--primary-blue);">https://thesai.org/Downloads/Volume16No6/</a></li>
+          
+          <li>Milvus (2025). "How does anomaly detection work in cybersecurity?" <a href="https://milvus.io/ai-quick-reference/how-does-anomaly-detection-work-in-cybersecurity" target="_blank" style="color:var(--primary-blue);">https://milvus.io/ai-quick-reference/</a></li>
+          
+          <li>Universidade do Minho (2024). "Evaluating the impact of traffic sampling in network analysis." <a href="https://repositorium.uminho.pt/bitstreams/8a4a856f-d3b8-4401-92c9-eac6051b8e04/download" target="_blank" style="color:var(--primary-blue);">https://repositorium.uminho.pt/</a></li>
+          
+          <li>Apriorit (2025). "Using Statistical Methods in Anomaly Detection." <a href="https://www.apriorit.com/dev-blog/anomaly-detection-with-statistical-methods" target="_blank" style="color:var(--primary-blue);">https://www.apriorit.com/dev-blog/anomaly-detection-with-statistical-methods</a></li>
+          
+          <li>Acceldata (2025). "Effective Techniques for Statistical Anomaly Detection." <a href="https://www.acceldata.io/blog/how-to-detect-statistical-anomalies-with-proven-methods" target="_blank" style="color:var(--primary-blue);">https://www.acceldata.io/blog/</a></li>
+          
+          <li>Statology (2024). "7 Statistical Methods for Evaluating Cybersecurity Risks." <a href="https://www.statology.org/7-statistical-methods-evaluating-cybersecurity-risks/" target="_blank" style="color:var(--primary-blue);">https://www.statology.org/</a></li>
+          
+          <li>Nature Scientific Reports (2025). "Leveraging data analytics to revolutionize cybersecurity: A comprehensive review." <a href="https://www.nature.com/articles/s41598-025-16932-3" target="_blank" style="color:var(--primary-blue);">https://www.nature.com/articles/s41598-025-16932-3</a></li>
+          
+          <li>ScienceDirect (2024). "Semi-supervised Statistical Approach for Network Anomaly Detection." <a href="https://www.sciencedirect.com/science/article/pii/S1877050916302617" target="_blank" style="color:var(--primary-blue);">https://www.sciencedirect.com/</a></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 CyberStatistics - Statistics for Cybersecurity A.Y. 2025/26</p>
+    </div>
+  </footer>
+
+  <script src="/CyberStatistics/homework/homework5/main.js" defer></script>
+</body>
 </html>

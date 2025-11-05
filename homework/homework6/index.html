@@ -1,51 +1,291 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CyberStatistics - Homework 6</title>
-    <link rel="stylesheet" href="/CyberStatistics/assets/styles.css">
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <h1 class="brand"><a href="/CyberStatistics/index.html" style="text-decoration:none; color:inherit;">CyberStatistics</a></h1>
-        <nav aria-label="Main navigation">
-          <ul class="nav">
-            <li><a href="/CyberStatistics/index.html">Home</a></li>
-            <li><a href="/CyberStatistics/about.html">About</a></li>
-            <li class="dropdown">
-              <a href="#">Homework ▾</a>
-              <div class="dropdown-content">
-                <a href="/CyberStatistics/homework/homework1/index.html">Homework 1</a>
-                <a href="/CyberStatistics/homework/homework2/index.html">Homework 2</a>
-                <a href="/CyberStatistics/homework/homework3/index.html">Homework 3</a>
-                <a href="/CyberStatistics/homework/homework4/index.html">Homework 4</a>
-                <a href="/CyberStatistics/homework/homework5/index.html">Homework 5</a>
-                <a href="/CyberStatistics/homework/homework6/index.html" aria-current="page">Homework 6</a>
-                <a href="/CyberStatistics/homework/homework7/index.html">Homework 7</a>
-                <a href="/CyberStatistics/homework/homework8/index.html">Homework 8</a>
-              </div>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-    
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CyberStatistics - Homework 6</title>
+  <link rel="stylesheet" href="/CyberStatistics/assets/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">
+        <a href="/CyberStatistics/index.html" style="text-decoration:none; color:inherit;">CyberStatistics</a>
+      </h1>
+      <nav aria-label="Main navigation">
+        <ul class="nav">
+          <li><a href="/CyberStatistics/index.html">Home</a></li>
+          <li><a href="/CyberStatistics/about.html">About</a></li>
+          <li class="dropdown">
+            <a href="#">Homework ▾</a>
+            <div class="dropdown-content">
+              <a href="/CyberStatistics/homework/homework1/index.html">Homework 1</a>
+              <a href="/CyberStatistics/homework/homework2/index.html">Homework 2</a>
+              <a href="/CyberStatistics/homework/homework3/index.html">Homework 3</a>
+              <a href="/CyberStatistics/homework/homework4/index.html">Homework 4</a>
+              <a href="/CyberStatistics/homework/homework5/index.html">Homework 5</a>
+              <a href="/CyberStatistics/homework/homework6/index.html" aria-current="page">Homework 6</a>
+              <a href="/CyberStatistics/homework/homework7/index.html">Homework 7</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <main class="container" id="main">
+  <main class="container" id="main">
     <section class="hero" aria-labelledby="hero-title">
-    <h2 id="hero-title">Homework 6</h2>
-    <p class="lead">Homework 6 will be published here</p>
+      <h2 id="hero-title">Homework 6: Online Algorithms for Mean and Variance</h2>
+      <p class="lead">
+        Derive recurrence relationships for arithmetic mean and variance from first principles. 
+        Implement numerically stable online algorithms (Welford's method) that update statistics incrementally, 
+        avoiding batch computation inefficiencies and numerical instability issues.
+      </p>
     </section>
 
-    </main>
+    <section class="content" aria-labelledby="intro">
+      <h2 id="intro">1. Introduction: Why Online Algorithms?</h2>
+      <p>
+        Traditional "batch" algorithms for computing mean and variance require storing all data points 
+        and making multiple passes through the dataset. This approach suffers from:
+      </p>
+      <ul style="line-height:2;">
+        <li><strong>Memory inefficiency:</strong> Storing large datasets is impractical for streaming data or limited-memory systems.</li>
+        <li><strong>Computational overhead:</strong> Two-pass algorithms require \( O(n) \) storage and time for each update.</li>
+        <li><strong>Numerical instability:</strong> Direct computation using \( \sigma^2 = \frac{1}{n}\sum x_i^2 - \bar{x}^2 \) suffers from catastrophic cancellation when \( \sum x_i^2 \) and \( n\bar{x}^2 \) are close in magnitude but large.</li>
+      </ul>
+      <p>
+        <strong>Online (incremental) algorithms</strong> solve these problems by maintaining running statistics 
+        with \( O(1) \) memory and update time per observation, while providing superior numerical stability.
+      </p>
+    </section>
 
-
-    <footer class="site-footer">
-      <div class="container">
-        <p>&copy; 2025 CyberStatistics - Statistics for Cybersecurity (A.Y. 2025/26)</p>
+    <section class="content" aria-labelledby="derivation">
+      <h2 id="derivation">2. Mathematical Derivations</h2>
+      
+      <h3 style="color:var(--primary-blue); margin-top:1.5rem;">2.1 Recurrence Relation for Mean</h3>
+      <div style="padding:1.25rem; background:rgba(255,255,255,0.05); border-radius:8px; margin:1rem 0;">
+        <p><strong>Theorem:</strong> Given \( n \) observations with mean \( \bar{x}_n \), when adding observation \( x_{n+1} \), the new mean is:</p>
+        <p style="text-align:center; font-size:1.1rem; margin:1rem 0;">
+          \[ \bar{x}_{n+1} = \bar{x}_n + \frac{x_{n+1} - \bar{x}_n}{n+1} \]
+        </p>
+        <p><strong>Proof:</strong></p>
+        <p style="margin-left:2rem;">
+          By definition, \( \bar{x}_{n+1} = \frac{1}{n+1}\sum_{i=1}^{n+1} x_i \)<br><br>
+          \( = \frac{1}{n+1}\left(\sum_{i=1}^{n} x_i + x_{n+1}\right) \)<br><br>
+          \( = \frac{1}{n+1}\left(n\bar{x}_n + x_{n+1}\right) \)<br><br>
+          \( = \frac{n\bar{x}_n + x_{n+1}}{n+1} \)<br><br>
+          \( = \frac{(n+1)\bar{x}_n + x_{n+1} - \bar{x}_n}{n+1} \)<br><br>
+          \( = \bar{x}_n + \frac{x_{n+1} - \bar{x}_n}{n+1} \) \( \quad \blacksquare \)
+        </p>
+        <p style="margin-top:1rem; color:var(--muted);">
+          <strong>Key insight:</strong> Update is proportional to the "surprise" \( (x_{n+1} - \bar{x}_n) \), scaled by \( 1/(n+1) \).
+        </p>
       </div>
-    </footer>
-  </body>
+
+      <h3 style="color:var(--accent-orange); margin-top:1.5rem;">2.2 Recurrence Relation for Variance (Welford's Method)</h3>
+      <div style="padding:1.25rem; background:rgba(255,255,255,0.05); border-radius:8px; margin:1rem 0;">
+        <p><strong>Theorem:</strong> Define \( M_{2,n} = \sum_{i=1}^{n}(x_i - \bar{x}_n)^2 \). Then:</p>
+        <p style="text-align:center; font-size:1.1rem; margin:1rem 0;">
+          \[ M_{2,n+1} = M_{2,n} + (x_{n+1} - \bar{x}_n)(x_{n+1} - \bar{x}_{n+1}) \]
+        </p>
+        <p>Variance is then \( \sigma_n^2 = \frac{M_{2,n}}{n} \) (population) or \( s_n^2 = \frac{M_{2,n}}{n-1} \) (sample).</p>
+        
+        <p style="margin-top:1.5rem;"><strong>Proof:</strong></p>
+        <p style="margin-left:2rem;">
+          By definition:<br>
+          \( M_{2,n+1} = \sum_{i=1}^{n+1}(x_i - \bar{x}_{n+1})^2 \)<br><br>
+          \( = \sum_{i=1}^{n}(x_i - \bar{x}_{n+1})^2 + (x_{n+1} - \bar{x}_{n+1})^2 \)<br><br>
+          
+          For the sum over \( i=1\) to \( n \):<br>
+          \( \sum_{i=1}^{n}(x_i - \bar{x}_{n+1})^2 = \sum_{i=1}^{n}[(x_i - \bar{x}_n) + (\bar{x}_n - \bar{x}_{n+1})]^2 \)<br><br>
+          
+          \( = \sum_{i=1}^{n}(x_i - \bar{x}_n)^2 + 2(\bar{x}_n - \bar{x}_{n+1})\sum_{i=1}^{n}(x_i - \bar{x}_n) + n(\bar{x}_n - \bar{x}_{n+1})^2 \)<br><br>
+          
+          Note that \( \sum_{i=1}^{n}(x_i - \bar{x}_n) = 0 \) by definition of mean, so:<br><br>
+          
+          \( = M_{2,n} + n(\bar{x}_n - \bar{x}_{n+1})^2 \)<br><br>
+          
+          From Section 2.1, we know \( \bar{x}_{n+1} - \bar{x}_n = \frac{x_{n+1} - \bar{x}_n}{n+1} \), thus:<br><br>
+          
+          \( \bar{x}_n - \bar{x}_{n+1} = -\frac{x_{n+1} - \bar{x}_n}{n+1} \)<br><br>
+          
+          Therefore:<br>
+          \( M_{2,n+1} = M_{2,n} + n\left(\frac{x_{n+1} - \bar{x}_n}{n+1}\right)^2 + (x_{n+1} - \bar{x}_{n+1})^2 \)<br><br>
+          
+          Simplifying \( (x_{n+1} - \bar{x}_{n+1})^2 \):<br>
+          \( (x_{n+1} - \bar{x}_{n+1}) = (x_{n+1} - \bar{x}_n) - (\bar{x}_{n+1} - \bar{x}_n) = (x_{n+1} - \bar{x}_n)\left(1 - \frac{1}{n+1}\right) = (x_{n+1} - \bar{x}_n)\frac{n}{n+1} \)<br><br>
+          
+          After algebraic manipulation:<br>
+          \( M_{2,n+1} = M_{2,n} + (x_{n+1} - \bar{x}_n)(x_{n+1} - \bar{x}_{n+1}) \) \( \quad \blacksquare \)
+        </p>
+        <p style="margin-top:1rem; color:var(--muted);">
+          <strong>Numerical advantage:</strong> Both terms on the right are \( O(x_{n+1}) \), preventing catastrophic cancellation.
+        </p>
+      </div>
+    </section>
+
+    <section class="content" aria-labelledby="algorithm">
+      <h2 id="algorithm">3. Welford's Online Algorithm</h2>
+      
+      <div style="padding:1.25rem; background:rgba(11,105,255,0.05); border-radius:8px; border-left:4px solid var(--primary-blue); margin:1rem 0;">
+        <h3 style="margin-top:0; font-size:1.1rem;">Algorithm Pseudocode</h3>
+        <pre style="background:#1e1e1e; color:#d4d4d4; padding:1rem; border-radius:6px; overflow-x:auto; font-size:0.9rem;"><code>// Initialize
+count = 0
+mean = 0
+M2 = 0
+
+// For each new value x:
+function update(x):
+    count = count + 1
+    delta = x - mean
+    mean = mean + delta / count
+    delta2 = x - mean
+    M2 = M2 + delta * delta2
+
+// Retrieve statistics:
+function finalize():
+    if count < 2:
+        return NaN
+    variance_population = M2 / count
+    variance_sample = M2 / (count - 1)
+    std_dev = sqrt(variance_sample)
+    return (mean, variance_population, variance_sample, std_dev)</code></pre>
+        <p style="margin-top:1rem;">
+          <strong>Complexity:</strong> \( O(1) \) time and \( O(1) \) space per update.<br>
+          <strong>Stability:</strong> Avoids subtraction of large, nearly-equal numbers.
+        </p>
+      </div>
+    </section>
+
+    <section class="content" aria-labelledby="demo">
+      <h2 id="demo">4. Interactive Testing & Comparison</h2>
+      <p>
+        Compare online vs. batch algorithms on numerically challenging datasets. 
+        Observe how online algorithms maintain accuracy even with extreme values.
+      </p>
+
+      <div style="margin-top:1.5rem;">
+        <label style="display:block; margin-bottom:0.5rem; font-weight:600;">Test Dataset Selection</label>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+          <button id="testNormal" class="test-btn" 
+            style="padding:0.6rem 1.2rem; background:var(--primary-blue); color:#fff; border:none; border-radius:6px; cursor:pointer;">
+            Normal Data (n=1000)
+          </button>
+          <button id="testLargeOffset" class="test-btn"
+            style="padding:0.6rem 1.2rem; background:var(--primary-blue); color:#fff; border:none; border-radius:6px; cursor:pointer;">
+            Large Offset (10⁹ + small variance)
+          </button>
+          <button id="testCatastrophic" class="test-btn"
+            style="padding:0.6rem 1.2rem; background:var(--accent-orange); color:#fff; border:none; border-radius:6px; cursor:pointer;">
+            Catastrophic Case
+          </button>
+        </div>
+
+        <div id="resultsContainer" style="display:none; margin-top:2rem;">
+          <h3 style="color:var(--primary-blue);">Results Comparison</h3>
+          
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin:1.5rem 0;">
+            <div style="border:1px solid rgba(11,105,255,0.3); border-radius:8px; padding:1.25rem;">
+              <h4 style="margin-top:0; color:var(--primary-blue);">Online Algorithm (Welford)</h4>
+              <div style="line-height:2;">
+                <div><strong>Mean:</strong> <span id="onlineMean" style="font-family:monospace;">—</span></div>
+                <div><strong>Variance:</strong> <span id="onlineVar" style="font-family:monospace;">—</span></div>
+                <div><strong>Std Dev:</strong> <span id="onlineStd" style="font-family:monospace;">—</span></div>
+                <div style="margin-top:0.5rem; color:var(--muted); font-size:0.9rem;">
+                  <strong>Time:</strong> <span id="onlineTime">—</span> ms
+                </div>
+              </div>
+            </div>
+
+            <div style="border:1px solid rgba(255,122,24,0.3); border-radius:8px; padding:1.25rem;">
+              <h4 style="margin-top:0; color:var(--accent-orange);">Batch Algorithm (Naive)</h4>
+              <div style="line-height:2;">
+                <div><strong>Mean:</strong> <span id="batchMean" style="font-family:monospace;">—</span></div>
+                <div><strong>Variance:</strong> <span id="batchVar" style="font-family:monospace;">—</span></div>
+                <div><strong>Std Dev:</strong> <span id="batchStd" style="font-family:monospace;">—</span></div>
+                <div style="margin-top:0.5rem; color:var(--muted); font-size:0.9rem;">
+                  <strong>Time:</strong> <span id="batchTime">—</span> ms
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:1rem; background:rgba(255,255,255,0.03); border-radius:8px; margin-top:1rem;">
+            <h4 style="margin-top:0;">Error Analysis</h4>
+            <div style="line-height:2; font-family:monospace;">
+              <div><strong>Mean Error:</strong> <span id="errorMean" style="color:var(--accent-orange);">—</span></div>
+              <div><strong>Variance Error:</strong> <span id="errorVar" style="color:var(--accent-orange);">—</span></div>
+              <div id="warningMsg" style="margin-top:1rem; padding:0.75rem; background:rgba(255,122,24,0.1); border-radius:6px; display:none; color:var(--accent-orange);"></div>
+            </div>
+          </div>
+
+          <div style="margin-top:2rem;">
+            <h4>Convergence Visualization</h4>
+            <div style="width:100%; max-width:100%; overflow:hidden;">
+              <div style="position:relative; height:350px; width:100%;">
+                nvas id="convergenceChartart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content" aria-labelledby="advantages">
+      <h2 id="advantages">5. Advantages of Online Algorithms</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem; margin:1.5rem 0;">
+        <div class="card">
+          <div class="card-title">Memory Efficiency</div>
+          <p style="margin:0.8rem 0; line-height:1.7;">
+            Batch: \( O(n) \) storage<br>
+            Online: \( O(1) \) storage<br><br>
+            Critical for streaming data, embedded systems, and big data applications.
+          </p>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Computational Efficiency</div>
+          <p style="margin:0.8rem 0; line-height:1.7;">
+            Batch: \( O(n) \) per update<br>
+            Online: \( O(1) \) per update<br><br>
+            Enables real-time analytics and low-latency systems.
+          </p>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">Numerical Stability</div>
+          <p style="margin:0.8rem 0; line-height:1.7;">
+            Avoids catastrophic cancellation in variance computation.<br><br>
+            Maintains accuracy with extreme values and large offsets.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content" aria-labelledby="references">
+      <h2 id="references">References</h2>
+      <div style="padding:1rem; background:rgba(255,255,255,0.03); border-radius:8px;">
+        <ol style="line-height:2; font-size:0.9rem;">
+          <li>Welford, B. P. (1962). "Note on a method for calculating corrected sums of squares and products." <em>Technometrics</em> 4(3): 419-420.</li>
+          <li>Knuth, D. E. (1998). <em>The Art of Computer Programming, Volume 2: Seminumerical Algorithms</em>, 3rd ed. Addison-Wesley.</li>
+          <li>Chan, T. F., Golub, G. H., & LeVeque, R. J. (1983). "Algorithms for computing the sample variance: Analysis and recommendations." <em>The American Statistician</em> 37(3): 242-247.</li>
+          <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance" target="_blank" style="color:var(--primary-blue);">Algorithms for calculating variance</a></li>
+          <li>Finch, T. (2009). "Incremental calculation of weighted mean and variance." University of Cambridge Computing Service.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 CyberStatistics - Statistics for Cybersecurity A.Y. 2025/26</p>
+    </div>
+  </footer>
+
+  <script src="/CyberStatistics/homework/homework6/main.js" defer></script>
+</body>
 </html>
